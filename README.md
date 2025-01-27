@@ -164,6 +164,10 @@ The Random Forest Regressor was configured with the following default hyperparam
   ## Top 10 prediction errors for Random Forest based on the examples
 
   ![Random_Forest](Top_10_RandomForest.png)
+  
+  The table below shows the top 10 prediction errors in descending order, highlighting the
+magnitude of the relative percentage error (| 100*(Ytrue - Ypred)/Ytrue |). The errors are not
+significantly large, which indicates the model is performing well.
 
 ### Random Forest prediction that contains all the load values for June 1-7, 2008
 
