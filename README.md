@@ -1,9 +1,11 @@
-# Hourly Load Forecasting: A Comparative Evaluation of Machine Learning Models Across 20 US Zones
+# Hourly Load Forecasting:
+## A Comparative Evaluation of Machine Learning Models Across 20 US Zones
 
 ## Overview
 
-This project uses temperature and historical load data from 11 stations to predict hourly load values across 20 US zones for the week of June 1-7, 2008. Data preprocessing includes outlier removal and feature engineering. We map temperature stations to load zones based on their correlation to optimize predictions. Two machine learning algorithms, linear regression and a more complex random forest model, are evaluated and tuned on training and validation datasets. The models' performances are compared in terms of speed and accuracy, with the best-performing model selected for final predictions. Results from both models are systematically compared to determine effectiveness.
-
+This project uses temperature and historical load data from 11 stations to predict hourly load values across 20 US zones for the week of June 1-7, 2008. Data preprocessing includes outlier removal and feature engineering. I map temperature stations to load zones based on their correlation to optimize predictions. Two machine learning algorithms, linear regression and a more complex random forest model, are evaluated and tuned on training and validation datasets. The models' performances are compared in terms of speed and accuracy, with the best-performing model selected for final predictions. Results from both models are systematically compared to determine effectiveness.
+## Training Data(11 temperature_Station and 20 Load_zones
+![TrainingData](TrainingData.png)
 ## Data Preprocessing and Mapping
 
 Project involves cleaning the data and establishing a significant correlation between temperature stations and load zones. The data is sourced from two CSV files: one containing temperature readings and the other load data from various utility companies across the US.
@@ -54,7 +56,7 @@ zones](Correlation.png)
 
 ### Procedure
 
-The process for developing our first machine learning model, the Linear Regression, involved several stages:
+The process for developing first machine learning model, the Linear Regression, involved several stages:
 
 1. **Data Loading and Preparation**: Data from load zone and temperature station CSV files is loaded into Pandas dataframes. The station with the strongest correlation (station 8) to the load zones is identified for feature selection.
 2. **Feature Selection and Engineering**: Features including zone ID, year, month, day, temperature, load values, and statistical measures (min, max, average, std, variance) are derived from the correlation analysis.
@@ -67,7 +69,7 @@ The process for developing our first machine learning model, the Linear Regressi
 
 ### Hyperparameters
 
-For our Linear Regression model, we considered the following hyperparameters:
+For our Linear Regression model, I considered the following hyperparameters:
 
 - `fit_intercept`: [True, False] - Specifies if a constant should be added to the decision function.
 - `positive`: [True, False] - Enforces the coefficients to be positive.
@@ -76,7 +78,7 @@ For our Linear Regression model, we considered the following hyperparameters:
 
 ### Hyperparameter Tuning with GridSearchCV and Model Evaluation
 
-Even though Linear Regression typically involves fewer hyperparameters, we employed `GridSearchCV` to systematically explore combinations and determine the optimal settings:
+Even though Linear Regression typically involves fewer hyperparameters, I employed `GridSearchCV` to systematically explore combinations and determine the optimal settings:
 
 ```python
 from sklearn.model_selection import GridSearchCV
@@ -169,7 +171,7 @@ The Random Forest Regressor was configured with the following default hyperparam
 magnitude of the relative percentage error (| 100*(Ytrue - Ypred)/Ytrue |). The errors are not
 significantly large, which indicates the model is performing well.
 
-### Random Forest prediction that contains all the load values for June 1-7, 2008
+### Random Forest prediction that contains all 20zones load values for June 1-7, 2008
 
 ![Load_Prediction](Load_prediction.png)
 
@@ -192,5 +194,5 @@ The project underscored the importance of selecting appropriate machine learning
 - **Bias-Variance Trade-off**: Striking the right balance to optimize model predictions.
 
 ## Project Conclusion
-This project aimed to predict hourly load values for a Ist week in June 2008 across 20 different load zones in the US, leveraging data from 11 temperature stations and historical load records. Through comprehensive data preprocessing—including outlier removal, data merging, and feature engineering—we prepared a robust dataset for modeling.
+This project aimed to predict hourly load values for a Ist week in June 2008 across 20 different load zones in the US, leveraging data from 11 temperature stations and historical load records. Through comprehensive data preprocessing including outlier removal, data merging, and feature engineering,I prepared a robust dataset for modeling.
 Ultimately, the Random Forest model emerged as the more suitable option for predicting load values in this context, showcasing its robustness and efficiency. This project highlights the potential of Random Forest as a powerful tool for load forecasting in the energy sector, capable of providing reliable and accurate predictions.
