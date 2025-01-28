@@ -1,6 +1,4 @@
-# # Load-Forecasting
-
-Hourly Load Prediction Using Machine Learning
+# Hourly Load Forecasting: A Comparative Evaluation of Machine Learning Models Across 20 US Zones
 
 ## Overview
 
@@ -17,8 +15,6 @@ Project involves cleaning the data and establishing a significant correlation be
 3. **Data Cleaning**:
    - **Outlier Removal**: Using statistical methods, outliers are identified and removed to ensure the model's accuracy.
    - **Feature Engineering**: New features are created based on statistical properties (like min, max, average, std, and variance per day) to enrich the model's input data.
-
-### Code Snippet
 
 ```python
 import pandas as pd
@@ -49,14 +45,12 @@ df_combined.drop(columns=['station_id', 'zone_id'], inplace=True)
 
 ### Heatmap Analysis
 
-The heatmap visualizes the correlation between average temperatures from 11 stations and load data across 20 zones. Darker green shades indicate stronger correlations, while darker purples show weaker ones. Each cell shows the correlation coefficient rounded to two decimal places.
+The heatmap visualizes the correlation between average temperatures from 11 stations and load data across 20 zones. Darker green shades indicate stronger correlations, while darker purples show weaker ones. Each cell shows the correlation coefficient rounded to two decimal places. Notably, stations 4 and 8 exhibit a strong negative correlation with zone 11, suggesting that higher temperatures at these stations lead to lower load demands in that zone. This insight is crucial for selecting the most predictive temperature stations for forecasting load values in specific zones.
 
-Notably, stations 4 and 8 exhibit a strong negative correlation with zone 11, suggesting that higher temperatures at these stations lead to lower load demands in that zone. This insight is crucial for selecting the most predictive temperature stations for forecasting load values in specific zones.
+![Correlation coefficients between 11 temperature stations and 20 load
+zones](Correlation.png)
 
-[Correlation coefficients between 11 temperature stations and 20 load
-zones](Correlation_HeatMap.png)
-
-## Linear Regression Model: Procedure and Trade-offs
+# Linear Regression Model:
 
 ### Procedure
 
@@ -68,14 +62,6 @@ The process for developing our first machine learning model, the Linear Regressi
 4. **Data Splitting**: The dataset is divided into training (70%) and testing (30%) sets.
 5. **Model Training and Hyperparameter Tuning**: The Linear Regression model is trained. Given the nature of this model, there are limited hyperparameters available for tuning.
 6. **Performance Evaluation**: The model is evaluated using metrics such as RMSE (Root Mean Squared Error), MAE (Mean Absolute Error), and R-squared scores.
-
-### Trade-offs
-
-- **Simplicity vs. Accuracy**: Linear Regression is chosen for its straightforwardness and interpretability. However, its simplicity may come at the cost of accuracy, particularly in complex datasets where the relationship between variables isn't purely linear.
-- **Overfitting**: Care is taken to avoid overfitting by selecting appropriate features and tuning the model's hyperparameters. Overfitting occurs when a model learns the training data too well, including the noise and outliers, which can degrade its performance on unseen data.
-- **Assumption of Linearity**: Linear regression assumes a linear relationship between the independent and dependent variables. If this assumption does not hold, the model's effectiveness decreases, prompting the exploration of more complex models.
-
-Despite these considerations, linear regression provides a solid foundation for understanding relationships within the data and serves as a benchmark for more sophisticated models.
 
 ## Model Hyperparameters and Performance
 
@@ -111,7 +97,7 @@ print(f"Best Parameters {lr_grid_search.best_params_}")
 ### Output Score
 
 The performance results for the Linear Regression model are as follows:
-[LinearRegression_output](LinearRegression_metrics.png)
+![LinearRegression_output](LinearRegression_metrics.png)
 
 ### Observations
 
@@ -125,11 +111,19 @@ The performance of the Linear Regression model was found to be suboptimal:
 
 These metrics suggest that the model does not fit the data well. Despite tuning hyperparameters, the low R2 score indicates poor predictive accuracy. Various strategies such as feature reduction, regularization to prevent overfitting, and employing more complex models like Decision Trees or Support Vector Machines might improve results. Further exploration using techniques like GridSearchCV or RandomizedSearchCV, selecting different feature sets, or engineering new features could also enhance model performance.
 
+### Trade-offs
+
+- **Simplicity vs. Accuracy**: Linear Regression is chosen for its straightforwardness and interpretability. However, its simplicity may come at the cost of accuracy, particularly in complex datasets where the relationship between variables isn't purely linear.
+- **Overfitting**: Care is taken to avoid overfitting by selecting appropriate features and tuning the model's hyperparameters. Overfitting occurs when a model learns the training data too well, including the noise and outliers, which can degrade its performance on unseen data.
+- **Assumption of Linearity**: Linear regression assumes a linear relationship between the independent and dependent variables. If this assumption does not hold, the model's effectiveness decreases, prompting the exploration of more complex models.
+
+Despite these considerations, linear regression provides a solid foundation for understanding relationships within the data and serves as a benchmark for more sophisticated models.
+
 ## Top 10 prediction errors for linear regression based on the examples
 
-[TOP 10 predictions](Ist_10_predictions.png)
+![TOP 10 predictions](Ist_10_predictions.png)
 
-### Second model(Strong model)
+# Second model(Strong model)
 
 ## Random Forest Regressor Model: Implementation and Evaluation
 
@@ -146,7 +140,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random
 
 - This configuration sets aside 30% of the data for testing, which helps in evaluating the model's generalization to new, unseen data.
 
-# Model Training with Default Settings
+### Model Training with Default Settings
 
 The Random Forest Regressor is implemented using default parameters to establish a baseline for its performance. This approach allows for assessing the effectiveness of the model without initial customization:
 
@@ -165,34 +159,28 @@ The Random Forest Regressor was configured with the following default hyperparam
 - max_features: 'auto' // The number of features to consider when looking for the best split
 - max_leaf_nodes: None // Maximum number of terminal nodes
 - random_state: 42 // Ensures reproducibility
-  [Random_forest_performance](Random_forest_metrics.png)
+  ![Random_forest_performance](Random_forest_metrics.png)
 
   ## Top 10 prediction errors for Random Forest based on the examples
 
-  [Random_Forest](Top_10_RandomForest.png)
+  ![Random_Forest](Top_10_RandomForest.png)
+  
+  The table below shows the top 10 prediction errors in descending order, highlighting the
+magnitude of the relative percentage error (| 100*(Ytrue - Ypred)/Ytrue |). The errors are not
+significantly large, which indicates the model is performing well.
 
-## Table summarizing your comparison of the two different ML models.
+### Random Forest prediction that contains all the load values for June 1-7, 2008
 
-[Comparison Table](Comparison.png)
-
-### Random Forest prediction
-
-## (Load prediction.csv) that contains all the load values for June 1-7, 2008
-
-[Load_Prediction](Load_prediction.png)
-
-## Project Conclusion
-
-### Overview
-
-This project aimed to predict hourly load values for a specific week in June 2008 across 20 different load zones in the US, leveraging data from 11 temperature stations and historical load records. Through comprehensive data preprocessing—including outlier removal, data merging, and feature engineering—we prepared a robust dataset for modeling.
+![Load_Prediction](Load_prediction.png)
 
 ### Machine Learning Model Comparison
 
-We employed two supervised machine learning algorithms:
+I employed two supervised machine learning algorithms:
 
 - **Linear Regression**: This model showed limited success, characterized by low R2 scores and high error rates. Despite efforts at hyperparameter tuning and various enhancements, it struggled to accurately predict load values, suggesting its limitations for complex datasets.
 - **Random Forest**: Contrarily, the Random Forest model delivered strong performance using default settings. It struck an effective balance between accuracy and interpretability, confirming its appropriateness for this analytical task without needing extensive tuning.
+- ## Table summarizing your comparison of the two different ML models.
+![Comparison Table](Comparison.png)
 
 ### Key Insights
 
@@ -203,6 +191,6 @@ The project underscored the importance of selecting appropriate machine learning
 - **Training Duration and Prediction Speed**: Managing the computational demands of the model relative to its performance.
 - **Bias-Variance Trade-off**: Striking the right balance to optimize model predictions.
 
-### Conclusion
-
+## Project Conclusion
+This project aimed to predict hourly load values for a Ist week in June 2008 across 20 different load zones in the US, leveraging data from 11 temperature stations and historical load records. Through comprehensive data preprocessing—including outlier removal, data merging, and feature engineering—we prepared a robust dataset for modeling.
 Ultimately, the Random Forest model emerged as the more suitable option for predicting load values in this context, showcasing its robustness and efficiency. This project highlights the potential of Random Forest as a powerful tool for load forecasting in the energy sector, capable of providing reliable and accurate predictions.
