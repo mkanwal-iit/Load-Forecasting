@@ -6,9 +6,6 @@ This project uses temperature and historical load data from 11 stations to predi
 ## Data Preprocessing and Mapping
 
 Project involves cleaning the data and establishing a significant correlation between temperature stations and load zones. The data is sourced from two CSV files: one containing temperature readings and the other load data from various utility companies across the US.
-
-### Process
-
 1. **Data Loading**: Data is loaded into NumPy dataframes, facilitating faster operations and easier handling.
 2. **Correlation Analysis**: I calculate correlation coefficients to identify strong links between specific temperature stations and load zones. This analysis helps in pinpointing which stations influence particular load zones the most.
 3. **Data Cleaning**:
@@ -141,10 +138,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random
 
 ### Model Training with Default Settings
 
-The Random Forest Regressor is implemented using default parameters to establish a baseline for its performance. This approach allows for assessing the effectiveness of the model without initial customization:
-
-## Random Forest Model: Configuration and Performance
-
+The Random Forest Regressor is implemented using default parameters to establish a baseline for its performance. This approach allows for assessing the effectiveness of the model without initial customization.
 ### Inputs: Default Hyperparameters
 
 The Random Forest Regressor was configured with the following default hyperparameters, chosen to provide a robust baseline without initial customization:
