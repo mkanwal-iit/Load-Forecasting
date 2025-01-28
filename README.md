@@ -1,10 +1,7 @@
-# Hourly Load Forecasting:
+# Hourly Load Forecasting
 ## A Comparative Evaluation of Machine Learning Models Across 20 US Zones
-
-## Overview
-
 This project uses temperature and historical load data from 11 stations to predict hourly load values across 20 US zones for the week of June 1-7, 2008. Data preprocessing includes outlier removal and feature engineering. I map temperature stations to load zones based on their correlation to optimize predictions. Two machine learning algorithms, linear regression and a more complex random forest model, are evaluated and tuned on training and validation datasets. The models' performances are compared in terms of speed and accuracy, with the best-performing model selected for final predictions. Results from both models are systematically compared to determine effectiveness.
-## Training Data(11 temperature_Station and 20 Load_zones
+## Training Data(11 temperature_Station and 20 Load_zones)
 ![TrainingData](TrainingData.png)
 ## Data Preprocessing and Mapping
 
